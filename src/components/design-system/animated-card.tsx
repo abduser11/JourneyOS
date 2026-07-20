@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { motion, type TargetAndTransition } from "framer-motion";
+import { motion } from "framer-motion";
+import type { TargetAndTransition, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { cardVariants, staggerItem } from "@/lib/animations";
 
@@ -17,8 +18,15 @@ interface AnimatedCardProps {
   className?: string;
 }
 
-const hoverAnimation: TargetAndTransition = { y: -2, transition: { duration: 0.15, ease: [0, 0, 0.2, 1] } };
-const tapAnimation: TargetAndTransition = { y: 0, transition: { duration: 0.15, ease: [0, 0, 0.2, 1] } };
+const hoverTarget: TargetAndTransition = {
+  y: -2,
+  transition: { duration: 0.15, ease: [0, 0, 0.2, 1] },
+};
+
+const tapTarget: TargetAndTransition = {
+  y: 0,
+  transition: { duration: 0.15, ease: [0, 0, 0.2, 1] },
+};
 
 export function AnimatedCard({
   children,
@@ -38,10 +46,10 @@ export function AnimatedCard({
           className
         )}
         variants={cardVariants}
-        initial="hidden"
-        animate="visible"
-        whileHover={hoverable ? hoverAnimation : undefined}
-        whileTap={tapAnimation}
+        initial={"hidden" as const}
+        animate={"visible" as const}
+        whileHover={hoverable ? hoverTarget : undefined}
+        whileTap={tapTarget}
         onClick={onClick}
       >
         {children}
@@ -72,20 +80,22 @@ interface StaggeredCardListProps {
   className?: string;
 }
 
+const staggerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.02,
+    },
+  },
+};
+
 export function StaggeredCardList({ children, className }: StaggeredCardListProps) {
   return (
     <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.05,
-            delayChildren: 0.02,
-          },
-        },
-      }}
+      initial={"hidden" as const}
+      animate={"visible" as const}
+      variants={staggerVariants}
       className={cn("grid gap-4", className)}
     >
       {React.Children.map(children, (child) => (
