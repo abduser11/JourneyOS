@@ -159,14 +159,6 @@ export const cardVariants: Variants = {
     y: 0,
     transition: transition.normal,
   },
-  hover: {
-    y: -2,
-    transition: transition.fast,
-  },
-  tap: {
-    y: 0,
-    transition: transition.fast,
-  },
 };
 
 // ─────────────────────────────────────────────
