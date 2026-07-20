@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
+import { motion, type TargetAndTransition } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { cardVariants, staggerItem } from "@/lib/animations";
 
@@ -16,6 +16,9 @@ interface AnimatedCardProps {
   onClick?: () => void;
   className?: string;
 }
+
+const hoverAnimation: TargetAndTransition = { y: -2, transition: { duration: 0.15, ease: [0, 0, 0.2, 1] } };
+const tapAnimation: TargetAndTransition = { y: 0, transition: { duration: 0.15, ease: [0, 0, 0.2, 1] } };
 
 export function AnimatedCard({
   children,
@@ -37,8 +40,8 @@ export function AnimatedCard({
         variants={cardVariants}
         initial="hidden"
         animate="visible"
-        whileHover={hoverable ? "hover" : undefined}
-        whileTap="tap"
+        whileHover={hoverable ? hoverAnimation : undefined}
+        whileTap={tapAnimation}
         onClick={onClick}
       >
         {children}
