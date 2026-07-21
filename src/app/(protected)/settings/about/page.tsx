@@ -10,7 +10,9 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Compass, ExternalLink, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
 export default function AboutSettingsPage() {
   return (
     <motion.div {...pageTransition} className="space-y-6">
@@ -22,8 +24,8 @@ export default function AboutSettingsPage() {
       </div>
 
       <Card className="p-8 text-center space-y-4">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-          <Compass className="h-8 w-8 text-primary" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/10">
+          <Compass className="h-8 w-8 text-brand" />
         </div>
 
         <h2 className="text-2xl font-bold text-foreground">JourneyOS</h2>
@@ -42,26 +44,18 @@ export default function AboutSettingsPage() {
         <h3 className="text-sm font-semibold text-foreground">Connect</h3>
 
         <div className="flex flex-wrap gap-3">
-          <a
-            href="https://github.com/abduser11/JourneyOS"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex"
-          >
+          <Link href="#" className="inline-flex">
             <Button variant="outline" size="sm" className="gap-2">
               <ExternalLink className="h-4 w-4" />
               GitHub
             </Button>
-          </a>
-          <a
-            href="mailto:info@journeyos.app"
-            className="inline-flex"
-          >
+          </Link>
+          <Link href="#" className="inline-flex">
             <Button variant="outline" size="sm" className="gap-2">
               <Mail className="h-4 w-4" />
               Contact
             </Button>
-          </a>
+          </Link>
         </div>
 
         <div className="pt-2 text-xs text-muted-foreground">

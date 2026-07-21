@@ -10,6 +10,7 @@
 
 import { useMemo } from "react";
 import { useSession } from "@/features/auth/hooks/useSession";
+
 import {
   WelcomeSection,
   ProfileSummaryCard,
@@ -23,6 +24,8 @@ import {
   NotificationsWidget,
   DashboardSkeleton,
 } from "@/features/dashboard/components";
+
+export const dynamic = 'force-dynamic';
 
 /**
  * Calculate profile completion based on available fields.

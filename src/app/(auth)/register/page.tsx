@@ -20,6 +20,7 @@ import { AUTH_ROUTES } from "@/features/auth/constants";
 import { useAuth } from "@/features/auth/hooks";
 import { pageTransition } from "@/lib/animations";
 
+export const dynamic = 'force-dynamic';
 export default function RegisterPage() {
   const { signUp, loading } = useAuth();
   const [email, setEmail] = useState("");

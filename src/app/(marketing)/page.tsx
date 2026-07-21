@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import {
-  ThemeProvider,
   Navbar,
   NavbarBrand,
   BottomNavigation,
@@ -44,6 +43,7 @@ import {
 } from "lucide-react";
 import { pageVariants } from "@/lib/animations";
 
+export const dynamic = 'force-dynamic';
 export default function DesignSystemShowcase() {
   const [activeTab, setActiveTab] = useState("components");
   const [modalOpen, setModalOpen] = useState(false);
@@ -70,8 +70,7 @@ export default function DesignSystemShowcase() {
   ];
 
   return (
-    <ThemeProvider defaultTheme="system" enableSystem>
-      <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
         {/* Top Navigation */}
         <Navbar
           brand={<NavbarBrand />}
@@ -521,6 +520,5 @@ export default function DesignSystemShowcase() {
         {/* Toaster */}
         <Toaster richColors position="top-center" />
       </div>
-    </ThemeProvider>
   );
 }

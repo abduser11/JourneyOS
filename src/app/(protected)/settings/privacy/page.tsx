@@ -11,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Download, Trash2 } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
 function Toggle({ defaultChecked = false, label, description }: { defaultChecked?: boolean; label: string; description: string }) {
   return (
     <div className="flex items-center justify-between">

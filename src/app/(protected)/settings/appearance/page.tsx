@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { ThemeToggle } from "@/components/shell/theme-toggle";
 
+export const dynamic = 'force-dynamic';
 function NativeSelect({ defaultValue, options, id }: { defaultValue: string; options: { value: string; label: string }[]; id: string }) {
   return (
     <select

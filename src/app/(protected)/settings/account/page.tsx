@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { KeyRound, ShieldCheck, LogOut } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
 export default function AccountSettingsPage() {
   return (
     <motion.div {...pageTransition} className="space-y-6">

@@ -21,6 +21,7 @@ import { AUTH_ROUTES } from "@/features/auth/constants";
 import { useAuth } from "@/features/auth/hooks";
 import { pageTransition } from "@/lib/animations";
 
+export const dynamic = 'force-dynamic';
 function VerifyEmailContent() {
   const { resendVerification, loading } = useAuth();
   const searchParams = useSearchParams();

@@ -21,6 +21,7 @@ import { AUTH_ROUTES } from "@/features/auth/constants";
 import { useAuth } from "@/features/auth/hooks";
 import { pageTransition } from "@/lib/animations";
 
+export const dynamic = 'force-dynamic';
 export default function LoginPage() {
   const { signIn, loading } = useAuth();
   const [email, setEmail] = useState("");

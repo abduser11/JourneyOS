@@ -20,6 +20,7 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
+
 import {
   User,
   Mail,
@@ -38,6 +39,8 @@ import {
   Sun,
   Heart,
 } from "lucide-react";
+
+export const dynamic = 'force-dynamic';
 
 export default function ProfilePage() {
   const { profile, travelDNA, loading } = useSession();

@@ -11,6 +11,7 @@ import { pageTransition } from "@/lib/animations";
 import { EmptyState } from "@/components/design-system/empty-state";
 import { Users } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
 export default function CommunityPage() {
   return (
     <motion.div {...pageTransition} className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">

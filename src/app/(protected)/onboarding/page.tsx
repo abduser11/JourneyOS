@@ -10,6 +10,7 @@
 import { TravelDNAWizard } from "@/features/onboarding/components";
 import type { Metadata } from "next";
 
+export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
   title: "Setup Your Travel DNA — JourneyOS",
   description: "Personalize your travel experience with a quick setup wizard.",

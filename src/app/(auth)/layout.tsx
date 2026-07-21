@@ -1,7 +1,4 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "@/components/design-system/theme-provider";
-import { QueryProvider } from "@/lib/providers";
-import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: "Authentication — JourneyOS",
@@ -14,15 +11,5 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <ThemeProvider
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <QueryProvider>
-        <TooltipProvider>{children}</TooltipProvider>
-      </QueryProvider>
-    </ThemeProvider>
-  );
+  return <>{children}</>;
 }
