@@ -1,28 +1,33 @@
 /**
  * JourneyOS Design System — Animation Presets
  *
- * Framer Motion animation variants and presets for consistent
- * transitions across the entire application.
+ * Framer Motion 12 compatible animation variants and presets.
+ *
+ * FM12 rules:
+ * - Never use string variant names in whileHover/whileTap — use explicit TargetAndTransition objects
+ * - Never name variant keys "hover" or "tap" in a Variants object (conflicts with FM12 inference)
+ * - Use TargetAndTransition for all whileHover/whileTap values
+ * - Spread objects must be typed as MotionProps-compatible
  *
  * Usage:
  *   <motion.div variants={fadeVariants} initial="hidden" animate="visible" />
  *   <motion.div {...pageTransition} />
  */
 
-import { type Variants, type Transition } from "framer-motion";
+import { type Variants, type Transition, type TargetAndTransition } from "framer-motion";
 
 // ─────────────────────────────────────────────
 //  TRANSITIONS
 // ─────────────────────────────────────────────
 
-const transition = {
+export const transition = {
   instant: { duration: 0.05 } as Transition,
   fast: { duration: 0.15, ease: [0, 0, 0.2, 1] } as Transition,
   normal: { duration: 0.25, ease: [0.4, 0, 0.2, 1] } as Transition,
   slow: { duration: 0.35, ease: [0.4, 0, 0.2, 1] } as Transition,
   slower: { duration: 0.5, ease: [0.4, 0, 0.2, 1] } as Transition,
-  spring: { type: "spring", stiffness: 350, damping: 30 } as Transition,
-  springSoft: { type: "spring", stiffness: 280, damping: 25 } as Transition,
+  spring: { type: "spring" as const, stiffness: 350, damping: 30 } as Transition,
+  springSoft: { type: "spring" as const, stiffness: 280, damping: 25 } as Transition,
 } as const;
 
 // ─────────────────────────────────────────────
@@ -125,6 +130,11 @@ export const slideRightVariants: Variants = {
 //  SCALE ANIMATIONS
 // ─────────────────────────────────────────────
 
+/**
+ * Scale variants for entrance animation.
+ * Renamed "hover" → "scaledUp" and "tap" → "scaledDown" to avoid
+ * FM12 type inference conflicts with whileHover/whileTap.
+ */
 export const scaleVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: {
@@ -132,11 +142,11 @@ export const scaleVariants: Variants = {
     scale: 1,
     transition: transition.spring,
   },
-  hover: {
+  scaledUp: {
     scale: 1.02,
     transition: transition.fast,
   },
-  tap: {
+  scaledDown: {
     scale: 0.98,
     transition: transition.fast,
   },
@@ -251,24 +261,31 @@ export const toastVariants: Variants = {
 };
 
 // ─────────────────────────────────────────────
-//  BUTTON INTERACTION
+//  BUTTON INTERACTION (FM12 COMPATIBLE)
 // ─────────────────────────────────────────────
 
-export const buttonVariants: Variants = {
-  hover: {
-    scale: 1.01,
-    transition: transition.fast,
-  },
-  tap: {
-    scale: 0.98,
-    transition: transition.fast,
-  },
+/**
+ * Explicit TargetAndTransition objects for hover/tap interactions.
+ * These are used directly as whileHover/whileTap values instead of
+ * string variant names, which FM12's type system rejects.
+ */
+export const buttonHoverTarget: TargetAndTransition = {
+  scale: 1.01,
+  transition: transition.fast,
 };
 
+export const buttonTapTarget: TargetAndTransition = {
+  scale: 0.98,
+  transition: transition.fast,
+};
+
+/**
+ * Backward-compatible button interaction props using explicit objects.
+ * This replaces the old string-based pattern that caused FM12 errors.
+ */
 export const buttonInteractionProps = {
-  whileHover: "hover",
-  whileTap: "tap",
-  variants: buttonVariants,
+  whileHover: buttonHoverTarget,
+  whileTap: buttonTapTarget,
 } as const;
 
 // ─────────────────────────────────────────────
