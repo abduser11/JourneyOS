@@ -1,12 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { X } from "lucide-react";
 import { chipVariants } from "@/lib/animations";
 
-export interface ChipProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ChipProps {
   label: string;
   variant?: "default" | "primary" | "secondary" | "outline" | "destructive";
   size?: "sm" | "md";
@@ -14,6 +13,7 @@ export interface ChipProps extends React.HTMLAttributes<HTMLDivElement> {
   onRemove?: () => void;
   selected?: boolean;
   className?: string;
+  onClick?: () => void;
 }
 
 const chipStyles = {
@@ -37,7 +37,7 @@ export function Chip({
   onRemove,
   selected,
   className,
-  ...props
+  onClick,
 }: ChipProps) {
   return (
     <motion.div
@@ -45,6 +45,7 @@ export function Chip({
       initial="hidden"
       animate="visible"
       exit="exit"
+      onClick={onClick}
       className={cn(
         "inline-flex items-center rounded-full font-medium transition-all duration-150",
         "cursor-default select-none",
@@ -53,9 +54,9 @@ export function Chip({
         selected && "ring-2 ring-brand ring-offset-1",
         className
       )}
-      {...props}
     >
       <span>{label}</span>
+
       {removable && (
         <button
           type="button"
@@ -73,16 +74,15 @@ export function Chip({
   );
 }
 
-// ─────────────────────────────────────────────
-//  CHIP GROUP
-// ─────────────────────────────────────────────
-
 interface ChipGroupProps {
   children: React.ReactNode;
   className?: string;
 }
 
-export function ChipGroup({ children, className }: ChipGroupProps) {
+export function ChipGroup({
+  children,
+  className,
+}: ChipGroupProps) {
   return (
     <motion.div
       initial="hidden"
@@ -90,7 +90,9 @@ export function ChipGroup({ children, className }: ChipGroupProps) {
       variants={{
         hidden: {},
         visible: {
-          transition: { staggerChildren: 0.03 },
+          transition: {
+            staggerChildren: 0.03,
+          },
         },
       }}
       className={cn("flex flex-wrap gap-2", className)}
