@@ -40,7 +40,10 @@ const buttonVariants = cva(
   }
 );
 
-// Export variants type
+/**
+ * Exported ButtonProps type
+ * Required by design-system components like EmptyState
+ */
 export type ButtonProps =
   ButtonPrimitive.Props &
   VariantProps<typeof buttonVariants>;
