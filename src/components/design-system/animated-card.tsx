@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import type { TargetAndTransition, Variants } from "framer-motion";
+import type { TargetAndTransition } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { cardVariants, staggerItem } from "@/lib/animations";
+import { staggerItem } from "@/lib/animations";
 
 // ─────────────────────────────────────────────
 //  ANIMATED CARD (single)
@@ -45,9 +45,12 @@ export function AnimatedCard({
           "cursor-pointer",
           className
         )}
-        variants={cardVariants}
-        initial={"hidden" as const}
-        animate={"visible" as const}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
+        }}
         whileHover={hoverable ? hoverTarget : undefined}
         whileTap={tapTarget}
         onClick={onClick}
@@ -80,26 +83,23 @@ interface StaggeredCardListProps {
   className?: string;
 }
 
-const staggerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.02,
-    },
-  },
-};
-
 export function StaggeredCardList({ children, className }: StaggeredCardListProps) {
   return (
     <motion.div
-      initial={"hidden" as const}
-      animate={"visible" as const}
-      variants={staggerVariants}
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: {
+          staggerChildren: 0.05,
+          delayChildren: 0.02,
+        },
+      }}
       className={cn("grid gap-4", className)}
     >
       {React.Children.map(children, (child) => (
-        <motion.div variants={staggerItem}>{child}</motion.div>
+        <motion.div variants={staggerItem} initial="hidden" animate="visible">
+          {child}
+        </motion.div>
       ))}
     </motion.div>
   );
